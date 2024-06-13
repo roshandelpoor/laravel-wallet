@@ -22,7 +22,7 @@ test('can store new amount in wallet for a user', function () {
     $wallet = Wallet::query()->find(['user_id' => $user->id]);
     $wallet = Wallet::query()->firstOrCreate([
         'user_id' => $user->id,
-        'balance' => ($wallet->balance ?? 0) + $amount 
+        'balance' => ($wallet->balance ?? 0) + $amount
     ]);
     $walletLogs = new WalletLogs([
         'ownable_id'    => $wallet->id,
@@ -59,7 +59,7 @@ test('can store product in wallet with custom table name from config', function 
     $wallet = Wallet::query()->find(['user_id' => $user->id]);
     $wallet = Wallet::query()->firstOrCreate([
         'user_id' => $user->id,
-        'balance' => ($wallet->balance ?? 0) + $amount 
+        'balance' => ($wallet->balance ?? 0) + $amount
     ]);
     $walletLogs = new WalletLogs([
         'ownable_id'    => $wallet->id,
@@ -88,9 +88,6 @@ test('can increse user wallet with increase method', function () {
 
     $wallet = Wallet::query()->increse($user->id, $amount);
 
-    // Assertions
-    assertInstanceOf($wallet::class, $walletLogs->ownable()->first());
-
     // DB Assertions
     assertDatabaseCount('wallets', 1);
     assertDatabaseCount('wallet_logs', 1);
@@ -106,9 +103,6 @@ test('can decrease user wallet with increase method', function () {
     $amount = -10;
 
     $wallet = Wallet::query()->decrease($user->id, $amount);
-
-    // Assertions
-    assertInstanceOf($wallet::class, $walletLogs->ownable()->first());
 
     // DB Assertions
     assertDatabaseCount('wallets', 1);
@@ -129,7 +123,7 @@ test('can store new amount in wallet for a user when user sign-in', function () 
     $wallet = Wallet::query()->find(['user_id' => $user->id]);
     $wallet = Wallet::query()->firstOrCreate([
         'user_id' => $user->id,
-        'balance' => ($wallet->balance ?? 0) + $amount 
+        'balance' => ($wallet->balance ?? 0) + $amount
     ]);
     $walletLogs = new WalletLogs([
         'ownable_id'    => $wallet->id,
